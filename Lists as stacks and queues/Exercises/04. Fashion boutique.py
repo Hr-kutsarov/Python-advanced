@@ -1,14 +1,32 @@
-stack_clothes = [int(x) for x in input().split()]
+from collections import deque
+'''
+You own a fashion boutique, and you receive a delivery of a huge box of clothes, represented as a sequence of integers.
+ On the next line, you will be given an integer representing the capacity for one rack in your store.  
+You must arrange the clothes in the store, and you use the racks to hang up every piece of clothing. You start from the
+ last piece of clothing on the top of the pile to the first one at the bottom. Use a stack for the purpose. Each piece 
+ of clothing has its value (an integer). You must sum their values, while you take them out of the box:
+•	If the sum becomes equal to the capacity of the current rack you must take a new one for the next clothes (if there
+ are any left in the box). 
+•	If the sum becomes greater than the capacity, do not hang the piece of clothing to the current rack. 
+Take a new rack and then hang it up.
+In the end, print how many racks you have used to hang up the clothes.
+Input:
+5 4 8 6 3 8 7 7 9
+16
+'''
+stack = [int(x) for x in input().split()]
 capacity = int(input())
-rack_counter = 1    # coat hangers
-current_rack = capacity
-while stack_clothes:    # if the stack has items in it
-    top_item = stack_clothes[-1]    # this is the item on top of the stack
-    if top_item <= current_rack:    # if this statement fits the fits the argument
-        stack_clothes.pop()     # pick up the item from the stack
-        current_rack -= top_item    # complete the argument
-    else:
-        rack_counter += 1   # if the argument is false, create new argument
-        current_rack = capacity     # reset the argument
+rack_counter = 1
+weight_counter = 0
+# print(stack) [5, 4, 8, 6, 3, 8, 7, 7, 9]
+
+while stack:
+    top_item = stack.pop()
+    weight_counter += top_item
+    if capacity <= weight_counter:
+        rack_counter += 1
+        weight_counter = top_item
 
 print(rack_counter)
+
+
